@@ -1,1 +1,28 @@
-
+question:
+after creating an array find out the smallest missing positive integer ?
+#include <stdio.h>
+void segregate_positive(int nums[], int n) {
+    for (int i = 0; i < n; i++) {
+        while (nums[i] >= 1 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {
+            int temp = nums[i];
+            nums[i] = nums[nums[i] - 1];
+            nums[temp - 1] = temp;
+        }
+    }
+}
+int find_missing_positive(int nums[], int n) {
+    segregate_positive(nums, n);
+    for (int i = 0; i < n; i++) {
+        if (nums[i] != i + 1) {
+            return i + 1;
+        }
+    }
+    return n + 1;
+}
+int main() {
+    int arr[] = {3, 4, -1, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int result = find_missing_positive(arr, n);
+    printf("Smallest missing positive integer is: %d\n", result);
+    return 0;
+}
