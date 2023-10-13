@@ -1,1 +1,14 @@
+permutations of a array:-
+
+def permute(arr):
+    if len(arr)==1:
+        return [arr]
+    ans=[]
+    for i in range(len(arr)):
+        temp_arr=[arr[i]]
+        s_arr=arr[0:i]+arr[i+1:]
+        p_arr=permute(s_arr)
+        for e in p_arr:
+            ans.append(temp_arr+e)
+        return ans
 
